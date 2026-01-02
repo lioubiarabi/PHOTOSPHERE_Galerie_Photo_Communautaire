@@ -122,6 +122,17 @@ class album
     }
 }
 
+class photo_album {
+    public function __construct(
+        public int $id,
+        public int $photoId
+    )
+    {
+        $this->id = $id;
+        $this->photoId = $photoId;
+    }
+}
+
 class tag
 {
     public function __construct(
