@@ -143,3 +143,14 @@ class tag
         $this->slug = $slug;
     }
 }
+
+class photo_tag {
+    public function __construct(
+        public int $id,
+        public int $photoId
+    )
+    {
+        $this->id = $id;
+        $this->photoId = $photoId;
+    }
+}
