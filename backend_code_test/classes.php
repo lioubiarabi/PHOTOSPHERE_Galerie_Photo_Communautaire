@@ -85,3 +85,7 @@ class album
         $this->userId = $userId;
     }
 }
+
+class tag {
+    
+}
