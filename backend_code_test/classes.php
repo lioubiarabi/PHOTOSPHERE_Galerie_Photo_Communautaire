@@ -63,20 +63,25 @@ class photo
         $this->publishedAt = $publishedAt;
         $this->createdAt = $createdAt;
     }
-
 }
 
-class album {
+class album
+{
     public function __construct(
         private int $id,
-        private int $name,
-        private int $public,
-        private int $cover,
-        private int $publishedAt,
-        private int $updatedAt,
+        private string $name,
+        private bool $public,
+        private string $cover,
+        private DateTime $publishedAt,
+        private DateTime $updatedAt,
         private int $userId
-    )
-    {
-      
+    ) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->public = $public;
+        $this->cover = $cover;
+        $this->publishedAt = $publishedAt;
+        $this->updatedAt = $updatedAt;
+        $this->userId = $userId;
     }
 }
