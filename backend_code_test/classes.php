@@ -63,4 +63,20 @@ class photo
         $this->publishedAt = $publishedAt;
         $this->createdAt = $createdAt;
     }
+
+}
+
+class album {
+    public function __construct(
+        private int $id,
+        private int $name,
+        private int $public,
+        private int $cover,
+        private int $publishedAt,
+        private int $updatedAt,
+        private int $userId
+    )
+    {
+      
+    }
 }
