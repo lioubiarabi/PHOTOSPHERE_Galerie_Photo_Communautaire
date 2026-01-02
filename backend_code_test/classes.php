@@ -86,6 +86,21 @@ class comment {
     }
 }
 
+class like {
+    public function __construct(
+        private int $id,
+        private DateTime $createdAt,
+        private int $photoId,
+        private int $userId
+    )
+    {
+        $this->id = $id;
+        $this->createdAt = $createdAt;
+        $this->photoId = $photoId;
+        $this->userId = $userId;
+    }
+}
+
 class album
 {
     public function __construct(
