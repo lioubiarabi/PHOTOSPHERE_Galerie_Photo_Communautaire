@@ -8,13 +8,25 @@ class user {
         private string $password,
         private string $role,
         private string $profilePicture,
-        private DateTime $cratedAt,
+        private DateTime $createdAt,
         private ?string $level,
         private ?int $uploadCount,
         private ?int $resetDate,
         private ?DateTime $lastrLogin
     ) {
-        
+        $this->id = $id;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->role = $role;
+        $this->profilePicture = $profilePicture;
+        $this->createdAt = $createdAt;
+        $this->level = $level;
+        $this->uploadCount = $uploadCount;
+        $this->resetDate = $resetDate;
+        $this->lastrLogin = $lastrLogin;
     }
+
+    
 }
 ?>
