@@ -86,6 +86,13 @@ class album
     }
 }
 
-class tag {
-    
+class tag
+{
+    public function __construct(
+        private int $id,
+        private string $slug,
+    ) {
+        $this->id = $id;
+        $this->slug = $slug;
+    }
 }
