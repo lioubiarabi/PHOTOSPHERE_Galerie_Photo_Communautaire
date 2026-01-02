@@ -65,6 +65,27 @@ class photo
     }
 }
 
+class comment {
+    public function __construct(
+        private int $id,
+        private string $content,
+        private bool $isArchived,
+        private DateTime $createdAt,
+        private DateTime $updatedAt,
+        private int $photoId,
+        private int $userId
+    )
+    {
+        $this->id = $id;
+        $this->content = $content;
+        $this->isArchived = $isArchived;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+        $this->photoId = $photoId;
+        $this->userId = $userId;
+    }
+}
+
 class album
 {
     public function __construct(
