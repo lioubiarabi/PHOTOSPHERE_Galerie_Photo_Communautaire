@@ -2,9 +2,6 @@
 
 class user
 {
-    private DateTime $createdAt;
-    private ?DateTime $lastLogin;
-    private ?int $resetDate;
     public function __construct(
         private int $id,
         private string $username,
@@ -13,7 +10,10 @@ class user
         private string $role,
         private string $profilePicture,
         private ?string $level,
-        private ?int $uploadCount
+        private ?int $uploadCount,
+        private DateTime $createdAt,
+        private ?DateTime $lastLogin,
+        private ?int $resetDate
     ) {
         $this->id = $id;
         $this->username = $username;
@@ -24,8 +24,8 @@ class user
         $this->createdAt = new DateTime();
         $this->level = $level;
         $this->uploadCount = $uploadCount;
-        $this->resetDate = null;
-        $this->lastLogin = null;
+        $this->resetDate = $resetDate;
+        $this->lastLogin = $lastLogin;
     }
 
     public function getId()
@@ -34,23 +34,33 @@ class user
     }
 }
 
-class photo {
-    private DateTime $updatedAt;
-    private DateTime $publishedAt;
-    private DateTime $createdAt;
-
+class photo
+{
     public function __construct(
-    private int $id,
-    private string $title,
-    private string $description,
-    private string $imageLink,
-    private int $fileSize,
-    private string $dimensions,
-    private string $state,
-    private int $viewCount ,
-    private int $userId
-    )
-    {
-
+        private int $id,
+        private string $title,
+        private string $description,
+        private string $imageLink,
+        private int $fileSize,
+        private string $dimensions,
+        private string $state,
+        private int $viewCount,
+        private int $userId,
+        private DateTime $createdAt,
+        private ?DateTime $updatedAt,
+        private ?DateTime $publishedAt
+    ) {
+        $this->id = $id;
+        $this->title = $title;
+        $this->description = $description;
+        $this->imageLink = $imageLink;
+        $this->fileSize = $fileSize;
+        $this->dimensions = $dimensions;
+        $this->state = $state;
+        $this->viewCount = $viewCount;
+        $this->userId = $userId;
+        $this->updatedAt = $updatedAt;
+        $this->publishedAt = $publishedAt;
+        $this->createdAt = $createdAt;
     }
 }
