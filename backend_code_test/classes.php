@@ -1,6 +1,10 @@
 <?php
 
-class user {
+class user
+{
+    private DateTime $createdAt;
+    private ?DateTime $lastLogin;
+    private ?int $resetDate;
     public function __construct(
         private int $id,
         private string $username,
@@ -8,11 +12,8 @@ class user {
         private string $password,
         private string $role,
         private string $profilePicture,
-        private DateTime $createdAt,
         private ?string $level,
-        private ?int $uploadCount,
-        private ?int $resetDate,
-        private ?DateTime $lastrLogin
+        private ?int $uploadCount
     ) {
         $this->id = $id;
         $this->username = $username;
@@ -20,13 +21,19 @@ class user {
         $this->password = $password;
         $this->role = $role;
         $this->profilePicture = $profilePicture;
-        $this->createdAt = $createdAt;
+        $this->createdAt = new DateTime();
         $this->level = $level;
         $this->uploadCount = $uploadCount;
-        $this->resetDate = $resetDate;
-        $this->lastrLogin = $lastrLogin;
+        $this->resetDate = null;
+        $this->lastLogin = null;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+
+class photo {
     
 }
-?>
