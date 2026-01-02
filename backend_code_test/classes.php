@@ -1,32 +1,18 @@
 <?php
 
-class user
+class User
 {
     public function __construct(
-        private int $id,
-        private string $username,
-        private string $email,
-        private string $password,
-        private string $role,
-        private string $profilePicture,
-        private ?string $level,
-        private ?int $uploadCount,
-        private DateTime $createdAt,
-        private ?DateTime $lastLogin,
-        private ?int $resetDate
-    ) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->role = $role;
-        $this->profilePicture = $profilePicture;
-        $this->createdAt = new DateTime();
-        $this->level = $level;
-        $this->uploadCount = $uploadCount;
-        $this->resetDate = $resetDate;
-        $this->lastLogin = $lastLogin;
-    }
+        protected int $id,
+        protected string $username,
+        protected string $email,
+        protected string $password,
+        protected string $profilePicture,
+        protected ?int $uploadCount,
+        protected DateTime $createdAt,
+        protected ?DateTime $lastLogin,
+        protected ?int $resetDate
+    ) {}
 
     public function getId()
     {
@@ -34,7 +20,73 @@ class user
     }
 }
 
-class photo
+class BasicUser extends User
+{
+    public function __construct() {}
+}
+
+class ProUser extends User
+{
+    public function __construct() {}
+}
+
+class Moderator extends User
+{
+    public function __construct(
+        private ?string $level,
+        int $id,
+        string $username,
+        string $email,
+        string $password,
+        string $profilePicture,
+        ?int $uploadCount,
+        DateTime $createdAt,
+        ?DateTime $lastLogin,
+        ?int $resetDate
+    ) {
+        parent::__construct(
+            $id,
+            $username,
+            $email,
+            $password,
+            $profilePicture,
+            $uploadCount,
+            $createdAt,
+            $lastLogin,
+            $resetDate
+        );
+    }
+}
+
+class Admin extends User
+{
+    public function __construct(
+        private bool $isSuper,
+        int $id,
+        string $username,
+        string $email,
+        string $password,
+        string $profilePicture,
+        ?int $uploadCount,
+        DateTime $createdAt,
+        ?DateTime $lastLogin,
+        ?int $resetDate
+    ) {
+        parent::__construct(
+            $id,
+            $username,
+            $email,
+            $password,
+            $profilePicture,
+            $uploadCount,
+            $createdAt,
+            $lastLogin,
+            $resetDate
+        );
+    }
+}
+
+class Photo
 {
     public function __construct(
         private int $id,
@@ -49,23 +101,11 @@ class photo
         private DateTime $createdAt,
         private ?DateTime $updatedAt,
         private ?DateTime $publishedAt
-    ) {
-        $this->id = $id;
-        $this->title = $title;
-        $this->description = $description;
-        $this->imageLink = $imageLink;
-        $this->fileSize = $fileSize;
-        $this->dimensions = $dimensions;
-        $this->state = $state;
-        $this->viewCount = $viewCount;
-        $this->userId = $userId;
-        $this->updatedAt = $updatedAt;
-        $this->publishedAt = $publishedAt;
-        $this->createdAt = $createdAt;
-    }
+    ) {}
 }
 
-class comment {
+class Comment
+{
     public function __construct(
         private int $id,
         private string $content,
@@ -74,34 +114,20 @@ class comment {
         private DateTime $updatedAt,
         private int $photoId,
         private int $userId
-    )
-    {
-        $this->id = $id;
-        $this->content = $content;
-        $this->isArchived = $isArchived;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
-        $this->photoId = $photoId;
-        $this->userId = $userId;
-    }
+    ) {}
 }
 
-class like {
+class Like
+{
     public function __construct(
         private int $id,
         private DateTime $createdAt,
         private int $photoId,
         private int $userId
-    )
-    {
-        $this->id = $id;
-        $this->createdAt = $createdAt;
-        $this->photoId = $photoId;
-        $this->userId = $userId;
-    }
+    ) {}
 }
 
-class album
+class Album
 {
     public function __construct(
         private int $id,
@@ -111,46 +137,29 @@ class album
         private DateTime $publishedAt,
         private DateTime $updatedAt,
         private int $userId
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->public = $public;
-        $this->cover = $cover;
-        $this->publishedAt = $publishedAt;
-        $this->updatedAt = $updatedAt;
-        $this->userId = $userId;
-    }
+    ) {}
 }
 
-class photo_album {
+class Photo_album
+{
     public function __construct(
         public int $id,
         public int $photoId
-    )
-    {
-        $this->id = $id;
-        $this->photoId = $photoId;
-    }
+    ) {}
 }
 
-class tag
+class Tag
 {
     public function __construct(
         private int $id,
         private string $slug,
-    ) {
-        $this->id = $id;
-        $this->slug = $slug;
-    }
+    ) {}
 }
 
-class photo_tag {
+class Photo_tag
+{
     public function __construct(
         public int $id,
         public int $photoId
-    )
-    {
-        $this->id = $id;
-        $this->photoId = $photoId;
-    }
+    ) {}
 }
