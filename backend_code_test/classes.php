@@ -18,17 +18,16 @@ class User
     {
         return $this->id;
     }
+
+    public function auth($username, $password){
+        if($this->username == $username && $this->password == $password) return true;
+        return false;
+    }
 }
 
-class BasicUser extends User
-{
-    public function __construct() {}
-}
+class BasicUser extends User {}
 
-class ProUser extends User
-{
-    public function __construct() {}
-}
+class ProUser extends User {}
 
 class Moderator extends User
 {
@@ -144,7 +143,8 @@ class Photo_album
 {
     public function __construct(
         public int $id,
-        public int $photoId
+        public int $photoId,
+        public int $albumId
     ) {}
 }
 
@@ -160,6 +160,7 @@ class Photo_tag
 {
     public function __construct(
         public int $id,
-        public int $photoId
+        public int $photoId,
+        public int $tagId
     ) {}
 }
