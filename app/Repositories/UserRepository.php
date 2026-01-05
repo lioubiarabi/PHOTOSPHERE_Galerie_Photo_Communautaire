@@ -20,7 +20,8 @@ class UserRepository implements RepositoryInterface {
 
     public function isLoggedIn(): bool
     {
-        return true;
+        if($this->current_user) return true;
+        return false;
     }
 
     public function logout(): bool
