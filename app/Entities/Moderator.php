@@ -9,10 +9,8 @@ class Moderator extends User
         string $email,
         string $password,
         string $profilePicture,
-        ?int $uploadCount,
         DateTime $createdAt,
-        ?DateTime $lastLogin,
-        ?int $resetDate
+        ?DateTime $lastLogin
     ) {
         parent::__construct(
             $id,
@@ -20,10 +18,8 @@ class Moderator extends User
             $email,
             $password,
             $profilePicture,
-            $uploadCount,
             $createdAt,
-            $lastLogin,
-            $resetDate
+            $lastLogin
         );
     }
 }
