@@ -25,6 +25,7 @@ class UserRepository implements RepositoryInterface {
 
     public function logout(): bool
     {
+        $this->current_user = null;
         return true;
     }
     
