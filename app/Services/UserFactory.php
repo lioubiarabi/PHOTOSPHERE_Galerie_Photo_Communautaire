@@ -12,9 +12,9 @@ class UserFactory
                     $userQuery['email'],
                     $userQuery['password'],
                     $userQuery['profilePicture'],
-                    $userQuery['createdAt'],
-                    $userQuery['lastLogin'],
-                    $userQuery['subscriptionEnd']
+                    new DateTime($userQuery['createdAt']),
+                    new DateTime($userQuery['lastLogin']),
+                    new DateTime($userQuery['subscriptionEnd'])
                 );
             case 'moderator':
                 return new Moderator(
@@ -24,8 +24,8 @@ class UserFactory
                     $userQuery['email'],
                     $userQuery['password'],
                     $userQuery['profilePicture'],
-                    $userQuery['createdAt'],
-                    $userQuery['lastLogin']
+                    new DateTime($userQuery['createdAt']),
+                    new DateTime($userQuery['lastLogin'])
                 );
             case 'admin':
                 return new Admin(
@@ -35,8 +35,8 @@ class UserFactory
                     $userQuery['email'],
                     $userQuery['password'],
                     $userQuery['profilePicture'],
-                    $userQuery['createdAt'],
-                    $userQuery['lastLogin']
+                    new DateTime($userQuery['createdAt']),
+                    new DateTime($userQuery['lastLogin'])
                 );
             default:
                 return new BasicUser(
@@ -46,9 +46,9 @@ class UserFactory
                     $userQuery['password'],
                     $userQuery['profilePicture'],
                     $userQuery['uploadCount'],
-                    $userQuery['createdAt'],
-                    $userQuery['lastLogin'],
-                    $userQuery['subscriptionEnd']
+                    new DateTime($userQuery['createdAt']),
+                    new DateTime($userQuery['lastLogin']),
+                    new DateTime($userQuery['subscriptionEnd'])
                 );
         }
     }
