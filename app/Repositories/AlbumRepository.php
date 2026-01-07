@@ -5,21 +5,44 @@ class AlbumRepository
 
     public function __construct(private PDO $pdo) {}
 
-    public function createAlbum(int $userId, string $title, string $description, string $cover, bool $isPublic): int {
-        try {
-            $this->pdo->beginTransaction();
+    public function createAlbum(int $userId, string $title, string $cover, bool $isPublic): int
+    {
+        $stmt = $this->pdo->prepare("SELECT * from album where name=? and userId=?");
+        $stmt->execute([$title, $userId]);
+        if ($stmt->fetch())
+            return 0;
 
-            if($this->pdo->prepare("SELECT * from album where title='$title' and userId='$userId'")->fetch())
-                throw new PDOException("You already created an album with the title: $title");
+        $this->pdo->prepare("INSERT into album (name, public, cover, publishedAt, userId) values (?, ?, ?, NOW(), ?)")->execute([$title, $isPublic, $cover, $userId]);
 
-            $this->pdo->prepare("INSERT into album (name, public, cover, publishedAt, userId) values (?, ?, ?, NOW(), ?)")->execute([$title, $description, $cover, $isPublic]);
 
-            $this->pdo->commit();
+        return $this->pdo->lastInsertId();
+    }
 
-            return $this->pdo->lastInsertId();
+    public function addPhotoToAlbum(int $albumId, int $photoId): bool
+    {
+            $stmt = $this->pdo->prepare("SELECT count(*) as total FROM photo_album where albumId=?");
+            $stmt->execute([$albumId]);
+            if ($stmt->fetch()['total'] >= 100) return false;
 
-        } catch (PDOException $e) {
-            echo "Error creating an album: " . $e->getMessage();
-        }
+            $stmt2 = $this->pdo->prepare("SELECT * FROM photo_album where albumId=? and photoId=?");
+            $stmt2->execute([$albumId, $photoId]);
+            if ($stmt2->fetch()) return false;
+
+            $stmt3 = $this->pdo->prepare("INSERT into photo_album values(?,?)");
+            $stmt3->execute([$albumId, $photoId]);
+
+            // update the album
+            $this->updateAlbum($albumId);
+            return true;
+    }
+
+    public function updateAlbum($albumId)
+    {
+        $stmt = $this->pdo->prepare("UPDATE album set updatedAt=NOW() WHERE id=?");
+        $stmt->execute([$albumId]);
+    }
+
+    public function removePhotoFromAlbum(int $albumId, int $photoId, int $userId): bool {
+        
     }
 }
