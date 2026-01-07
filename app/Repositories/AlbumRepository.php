@@ -47,6 +47,15 @@ class AlbumRepository
         $stmt = $this->pdo->prepare("DELETE FROM photo_album where albumId=? and photoId=?");
         $stmt->execute([$albumId, $photoId]);
 
+        // update the album
+        $this->updateAlbum($albumId);
+
         return true;
+    }
+
+    public function getAlbumWithPhotos(int $albumId): ?array {
+        $stmt = $this->pdo->prepare("SELECT p.* FROM photo p JOIN photo_album pa ON p.id = pa.photoId WHERE pa.albumId = ?");
+        $stmt->execute([$albumId]);
+        return $stmt->fetchAll();
     }
 }

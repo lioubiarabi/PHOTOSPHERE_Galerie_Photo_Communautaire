@@ -5,8 +5,10 @@ require '../Entities/BasicUser.php';
 require '../Entities/ProUser.php';
 require '../Entities/Moderator.php';
 require '../Entities/Admin.php';
+require '../Repositories/AlbumRepository.php';
 require '../Services/UserFactory.php';
-require 'RepositoryInterface.php';
+require '../Interfaces/RepositoryInterface.php';
+
 
 
 
@@ -56,6 +58,13 @@ class UserRepository implements RepositoryInterface
     {
         return true;
     }
+
+    public function getUserId(){
+        return $this->current_user->getId();
+    }
 };
 
 $db = new UserRepository($pdo);
+$albumRepo = new AlbumRepository($pdo);
+$db->login("alex_mountain", "hash_001");
+var_dump($albumRepo->createAlbum($db->getUserId(), "title1", "album_cover_20.png", true));
