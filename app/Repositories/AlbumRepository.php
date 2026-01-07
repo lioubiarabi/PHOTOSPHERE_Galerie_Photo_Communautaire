@@ -20,20 +20,20 @@ class AlbumRepository
 
     public function addPhotoToAlbum(int $albumId, int $photoId): bool
     {
-            $stmt = $this->pdo->prepare("SELECT count(*) as total FROM photo_album where albumId=?");
-            $stmt->execute([$albumId]);
-            if ($stmt->fetch()['total'] >= 100) return false;
+        $stmt = $this->pdo->prepare("SELECT count(*) as total FROM photo_album where albumId=?");
+        $stmt->execute([$albumId]);
+        if ($stmt->fetch()['total'] >= 100) return false;
 
-            $stmt2 = $this->pdo->prepare("SELECT * FROM photo_album where albumId=? and photoId=?");
-            $stmt2->execute([$albumId, $photoId]);
-            if ($stmt2->fetch()) return false;
+        $stmt2 = $this->pdo->prepare("SELECT * FROM photo_album where albumId=? and photoId=?");
+        $stmt2->execute([$albumId, $photoId]);
+        if ($stmt2->fetch()) return false;
 
-            $stmt3 = $this->pdo->prepare("INSERT into photo_album values(?,?)");
-            $stmt3->execute([$albumId, $photoId]);
+        $stmt3 = $this->pdo->prepare("INSERT into photo_album values(?,?)");
+        $stmt3->execute([$albumId, $photoId]);
 
-            // update the album
-            $this->updateAlbum($albumId);
-            return true;
+        // update the album
+        $this->updateAlbum($albumId);
+        return true;
     }
 
     public function updateAlbum($albumId)
@@ -42,7 +42,11 @@ class AlbumRepository
         $stmt->execute([$albumId]);
     }
 
-    public function removePhotoFromAlbum(int $albumId, int $photoId, int $userId): bool {
-        
+    public function removePhotoFromAlbum(int $albumId, int $photoId, int $userId): bool
+    {
+        $stmt = $this->pdo->prepare("DELETE FROM photo_album where albumId=? and photoId=?");
+        $stmt->execute([$albumId, $photoId]);
+
+        return true;
     }
 }
