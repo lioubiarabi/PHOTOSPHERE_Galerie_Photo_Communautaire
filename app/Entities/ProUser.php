@@ -9,7 +9,7 @@ class ProUser extends BasicUser {
         string $profilePicture,
         DateTime $createdAt,
         ?DateTime $lastLogin,
-        int $resetDate
+        DateTime $resetDate
     ) {
         parent::__construct(
             $id,
