@@ -11,7 +11,7 @@ class BasicUser extends User
         ?int $uploadCount,
         DateTime $createdAt,
         ?DateTime $lastLogin,
-        int $resetDate
+        DateTime $resetDate
     ) {
         parent::__construct(
             $id,
@@ -19,10 +19,8 @@ class BasicUser extends User
             $email,
             $password,
             $profilePicture,
-            $uploadCount,
             $createdAt,
-            $lastLogin,
-            $resetDate
+            $lastLogin
         );
     }
 }
